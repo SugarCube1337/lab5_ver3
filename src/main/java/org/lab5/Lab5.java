@@ -1,6 +1,5 @@
 package org.lab5;
 
-package com.aboba.lab5;
 
 import org.lab5.collection.data.CollectionManager;
 import org.lab5.exception.AbortException;

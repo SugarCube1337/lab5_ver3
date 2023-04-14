@@ -1,7 +1,5 @@
 package org.lab5.parser;
 
-package com.aboba.lab5.parser;
-
 import org.lab5.task.*;
 import java.io.IOException;
 import java.util.ArrayList;

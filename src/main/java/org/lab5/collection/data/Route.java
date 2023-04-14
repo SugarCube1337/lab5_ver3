@@ -1,9 +1,7 @@
 package org.lab5.collection.data;
 
-import org.lab5.collection.data.*
-
-import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * Represents a route with a unique ID, name, coordinates, creation date, start and end locations, and distance.
