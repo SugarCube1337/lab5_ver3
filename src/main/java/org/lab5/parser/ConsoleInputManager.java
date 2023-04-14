@@ -1,4 +1,4 @@
-package com.aboba.lab5.parser;
+package org.lab5.parser;
 
 import org.lab5.exception.AbortException;
 import org.lab5.parser.CommandParser;

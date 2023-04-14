@@ -1,6 +1,5 @@
 package org.lab5.collection.data;
 
-package com.aboba.lab5.collection;
 
 import org.lab5.collection.data.Location;
 import org.lab5.collection.data.Route;
