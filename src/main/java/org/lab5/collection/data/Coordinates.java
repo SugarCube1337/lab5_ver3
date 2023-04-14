@@ -1,4 +1,4 @@
-package org.lab5.data;
+package org.lab5.collection.data;
 
 /**
  * A class representing a pair of coordinates (x, y).

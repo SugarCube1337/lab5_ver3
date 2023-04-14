@@ -1,4 +1,4 @@
-package org.lab5.data;
+package org.lab5.collection.data;
 
 import org.lab5.data.locationfirst.Location;
 
