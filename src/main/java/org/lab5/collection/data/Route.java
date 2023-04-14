@@ -1,6 +1,6 @@
 package org.lab5.collection.data;
 
-import org.lab5.data.locationfirst.Location;
+import org.lab5.collection.data.*
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
