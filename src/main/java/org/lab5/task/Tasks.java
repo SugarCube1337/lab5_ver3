@@ -31,4 +31,17 @@ public class Tasks {
         return response;
     }
 
+    /**
+     * Requests integer from inputManager
+     * @param inputManager handles the input
+     * @return provided integer
+     * @throws NumberFormatException occurs when the input is incorrect
+     */
+    public static int getInteger(InputManager inputManager) throws NumberFormatException {
+        var line = getString(inputManager);
+        return Integer.parseInt(line);
+    }
+
+
+
 
