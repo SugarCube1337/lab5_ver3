@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 /**
  * Represents a route with a unique ID, name, coordinates, creation date, start and end locations, and distance.
  */
-public final class Route implements Comparable<Route>, Serializable{
+public final class Route implements Comparable<Route>, Serializable {
     private long id; // The value of this field must be greater than 0, The value of this field must be unique, The value of this field must be generated automatically
     private String name; // The field cannot be null, the string cannot be empty
     private Coordinates coordinates; // The field can't be null
@@ -14,6 +14,9 @@ public final class Route implements Comparable<Route>, Serializable{
     private Location from; // The field can't be null
     private Location to; // The field cannot be null
     private int distance; // The value of this field must be greater than 1
+
+    public static final long MIN_ID = 0;
+    public static final int MIN_DISTANCE = 1;
 
     private Route() {
         // Private constructor
