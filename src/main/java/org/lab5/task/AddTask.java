@@ -1,5 +1,8 @@
 package org.lab5.task;
 
+import org.lab5.collection.CollectionManager;
+import org.lab5.parser.InputManager;
+
 public class AddTask implements Task {
 
     private final InputManager inputManager;
