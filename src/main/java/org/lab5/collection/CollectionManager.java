@@ -1,4 +1,4 @@
-package org.lab5.collection.data;
+package org.lab5.collection;
 
 
 import com.fasterxml.jackson.core.JsonFactory;
@@ -6,6 +6,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.lab5.collection.data.Location;
+import org.lab5.collection.data.Route;
 import org.lab5.exception.IllegalFieldException;
 
 import java.io.File;
