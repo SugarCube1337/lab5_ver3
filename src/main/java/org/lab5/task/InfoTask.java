@@ -1,6 +1,6 @@
 package org.lab5.task;
 
-import org.lab5.collection.data.CollectionManager;
+import org.lab5.collection.CollectionManager;
 
 public class InfoTask implements Task {
 
