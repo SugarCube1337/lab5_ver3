@@ -8,10 +8,16 @@ import org.lab5.parser.BaseCommandParser;
 import org.lab5.parser.CommandParser;
 import org.lab5.parser.ConsoleInputManager;
 import java.io.IOException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.FileAttribute;
+import java.nio.file.attribute.PosixFilePermissions;
 
 /**
  * Main class for lab 5
  */
+
 public class Lab5 {
 
     private static final String DEFAULT_PATH = "data.json";
@@ -30,9 +36,20 @@ public class Lab5 {
         }
 
         try {
-            CollectionManager.load(path);
+            try {
+                CollectionManager.load(path);
+            } catch (JsonMappingException ex) {
+                if (ex.getMessage().contains("No content to map due to end-of-input")) {
+                    System.err.println("Error: JSON file is empty or incomplete");
+                } else {
+                    throw ex;
+                }
+            }
         } catch (IOException | IllegalFieldException ex) {
             System.err.println("Unable to load collection: " + ex.getMessage());
+        } catch (Throwable ex) {
+            System.err.println("Critical error");
+            ex.printStackTrace();
         }
 
         final CommandParser PARSER = new BaseCommandParser();
@@ -54,5 +71,6 @@ public class Lab5 {
         return path;
     }
 }
+
 
 
