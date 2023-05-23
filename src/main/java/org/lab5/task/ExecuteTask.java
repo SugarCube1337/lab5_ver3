@@ -10,6 +10,10 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The `ExecuteTask` class represents a task that executes a script from a specified file.
+ * It processes the commands in the script file, allowing for recursive execution of scripts.
+ */
 public class ExecuteTask implements Task {
 
     private final CommandParser parser;
@@ -25,34 +29,38 @@ public class ExecuteTask implements Task {
     @Override
     public void execute() {
         Set<String> used = new HashSet<>();
-        try (Scanner scanner = new Scanner(new File(filepath))) {
-            processScript(scanner, used);
-        } catch (FileNotFoundException ex) {
-            throw new IllegalArgumentException("Error while reading the file");
-        }
+        processScript(filepath, used);
     }
 
-    private void processScript(Scanner scanner, Set<String> used) {
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            System.out.println(line);
-            if (line.startsWith("execute_script")) {
-                String match = line.substring("execute_script".length()).trim();
-                if (used.contains(match)) {
-                    System.out.println("Recursion detected: " + match);
-                    continue; // Skip the current command and move on to the next one
+    private void processScript(String scriptPath, Set<String> used) {
+        if (used.contains(scriptPath)) {
+            System.out.println("Recursion detected: " + scriptPath);
+            return;
+        }
+
+        used.add(scriptPath);
+
+        try (Scanner scanner = new Scanner(new File(scriptPath))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                System.out.println(line);
+                if (line.startsWith("execute_script")) {
+                    String match = line.substring("execute_script".length()).trim();
+                    if (used.contains(match)) {
+                        System.out.println("Recursion detected: " + match);
+                    } else {
+                        processScript(match, new HashSet<>(used));
+                    }
+                } else {
+                    parser.parse(line, inputManager);
                 }
-                used.add(match);
-                try (Scanner scriptScanner = new Scanner(new File(match))) {
-                    processScript(scriptScanner, used);
-                } catch (FileNotFoundException e) {
-                    System.err.println("Error while reading the file: " + e.getMessage());
-                }
-            } else {
-                parser.parse(line, inputManager);
             }
+        } catch (FileNotFoundException e) {
+            throw new IllegalArgumentException("Error while reading the file: " + e.getMessage());
         }
     }
 }
+
+
 
 
