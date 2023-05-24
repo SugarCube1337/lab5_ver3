@@ -18,6 +18,9 @@ import java.nio.file.attribute.PosixFilePermissions;
  * Main class for lab 5
  */
 
+import java.io.IOException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 public class Lab5 {
 
     private static final String DEFAULT_PATH = "data.json";
@@ -44,9 +47,13 @@ public class Lab5 {
                 } else {
                     throw ex;
                 }
+            } catch (IOException ex) {
+                System.err.println("Error: Unable to load collection - " + ex.getMessage());
             }
-        } catch (IOException | IllegalFieldException ex) {
+        } catch (IllegalFieldException ex) {
             System.err.println("Unable to load collection: " + ex.getMessage());
+        } catch (SecurityException ex) {
+            System.err.println("Error: Permission denied while loading data. Please check your access rights.");
         } catch (Throwable ex) {
             System.err.println("Critical error");
             ex.printStackTrace();
