@@ -22,7 +22,8 @@ import java.util.*;
  */
 public class CollectionManager {
 
-    private CollectionManager() {}
+    private CollectionManager() {
+    }
 
     private static final HashSet<Route> data;
     private static final HashSet<Long> usedIds;
@@ -32,8 +33,9 @@ public class CollectionManager {
 
     /**
      * Loads and fills the collection from file
+     *
      * @param filepath path to file
-     * @throws IOException thrown when there are troubles with file
+     * @throws IOException           thrown when there are troubles with file
      * @throws IllegalFieldException thrown when trying to read invalid data
      */
     public static void load(String filepath) throws IOException, IllegalFieldException {
@@ -44,22 +46,30 @@ public class CollectionManager {
             builder.append(scanner.nextLine());
         }
         String serializedData = builder.toString();
-        ArrayList<Route> routes = mapper.readValue(serializedData, new TypeReference<>() {});
-        data.clear();
-        long skipped = 0;
+
+
+        // Deserialize the serializedData into an ArrayList of Route objects
+        ArrayList<Route> routes = mapper.readValue(serializedData, new TypeReference<>() {
+        });
+        data.clear(); // Clear the existing data in the collection
+
+        long skippedElements = 0;
+        // Add each Route to the collection, keeping track of skipped elements
         for (var it : routes) {
             if (!add(it)) {
-                ++skipped;
+                ++skippedElements;
             }
         }
         System.out.println("Loaded " + data.size() + " element(s)");
-        if (skipped > 0) {
-            System.out.println("Skipped " + skipped + " element(s) to prevent id duplication");
+        // Print the number of skipped elements, if any
+        if (skippedElements > 0) {
+            System.out.println("Skipped " + skippedElements + " element(s) to prevent id duplication");
         }
     }
 
     /**
      * Saves the collection to file
+     *
      * @param filepath path to file
      * @throws IOException thrown when there are troubles with file
      */
@@ -73,6 +83,7 @@ public class CollectionManager {
 
     /**
      * Generates string with info about collection
+     *
      * @return info about collection
      */
     public static String getInfo() {
@@ -85,6 +96,7 @@ public class CollectionManager {
 
     /**
      * Generates string with list of all elements
+     *
      * @return list of elements in collection
      */
     public static String getElements() {
@@ -100,6 +112,7 @@ public class CollectionManager {
 
     /**
      * Generates free id
+     *
      * @return free id
      */
     public static long genId() {
@@ -115,6 +128,7 @@ public class CollectionManager {
 
     /**
      * Adds new element to collection
+     *
      * @param route route to be added
      * @return true if element was added, otherwise false
      */
@@ -134,6 +148,7 @@ public class CollectionManager {
 
     /**
      * Adds new element to collection if it is minimal
+     *
      * @param route route to be added
      * @return true if element was added, otherwise false
      */
@@ -154,6 +169,7 @@ public class CollectionManager {
 
     /**
      * Removes element by its id
+     *
      * @param id id of element
      * @return true if element was removed, otherwise false
      */
@@ -170,6 +186,7 @@ public class CollectionManager {
 
     /**
      * Removes all the elements greater than provided route
+     *
      * @param route route to compare to
      * @return true if any element was removed, otherwise false
      */
@@ -187,6 +204,7 @@ public class CollectionManager {
 
     /**
      * Removes all the elements lower than provided route
+     *
      * @param route route to compare to
      * @return true if any element was removed, otherwise false
      */
@@ -204,6 +222,7 @@ public class CollectionManager {
 
     /**
      * Groups elements by its Location.To field and shows size of each
+     *
      * @return groups with its sizes
      */
     public static String countByTo() {
@@ -231,6 +250,7 @@ public class CollectionManager {
 
     /**
      * Counts number of occurrences of elements with distance greater than provided
+     *
      * @param distance distance to compare to
      * @return number of occurrences
      */
@@ -246,6 +266,7 @@ public class CollectionManager {
 
     /**
      * Finds all the unique values of distances in collection
+     *
      * @return set of distances
      */
     public static Set<Integer> uniqueDistances() {
@@ -258,8 +279,9 @@ public class CollectionManager {
 
     /**
      * Updates element in collection
+     *
      * @param route route for replacement
-     * @param id id of element to be updated
+     * @param id    id of element to be updated
      * @return true if element was updated, otherwise false
      */
     public static boolean update(Route route, long id) {
@@ -281,6 +303,7 @@ public class CollectionManager {
 
     /**
      * Checks if id is used
+     *
      * @param id id to check
      * @return true if id is used, otherwise false
      */
