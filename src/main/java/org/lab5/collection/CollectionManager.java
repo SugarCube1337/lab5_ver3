@@ -30,6 +30,8 @@ public class CollectionManager {
     private static final LocalDateTime creationTime;
     private static final ObjectMapper mapper;
     private static Route minRoute = null;
+    private static final String newLine = "\n\r";
+
 
     /**
      * Loads and fills the collection from file
@@ -87,10 +89,10 @@ public class CollectionManager {
      * @return info about collection
      */
     public static String getInfo() {
-        String info = "Collection info\n\r";
-        info += "Collection type: " + data.getClass() + "\n\r";
-        info += "Elements count: " + data.size() + "\n\r";
-        info += "Init time: " + creationTime.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy")) + "\n\r";
+        String info = "Collection info" + newLine;
+        info += "Collection type: " + data.getClass() + newLine;
+        info += "Elements count: " + data.size() + newLine;
+        info += "Init time: " + creationTime.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy")) + newLine;
         return info;
     }
 
@@ -101,11 +103,11 @@ public class CollectionManager {
      */
     public static String getElements() {
         if (data.isEmpty()) {
-            return "Collection is empty\n\r";
+            return "Collection is empty" + newLine;
         }
         var builder = new StringBuilder();
         for (Route route : data) {
-            builder.append(route).append("\n\r");
+            builder.append(route).append(newLine);
         }
         return builder.toString();
     }
@@ -238,12 +240,12 @@ public class CollectionManager {
                 groups.put(to, groups.get(to) + 1);
             }
         }
-        StringBuilder res = new StringBuilder("Groups: \n\r");
+        StringBuilder res = new StringBuilder("Groups:" +newLine);
         for (var it : groups.entrySet()) {
             res.append(it.getKey())
                     .append(", count: ")
                     .append(it.getValue())
-                    .append("\n\r");
+                    .append(newLine);
         }
         return res.toString();
     }
