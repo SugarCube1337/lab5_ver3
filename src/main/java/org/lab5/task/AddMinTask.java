@@ -3,6 +3,9 @@ package org.lab5.task;
 import org.lab5.collection.CollectionManager;
 import org.lab5.parser.InputManager;
 
+/**
+ * Represents a task to add a minimal route to the collection.
+ */
 public class AddMinTask implements Task {
     private final InputManager inputManager;
 
@@ -12,7 +15,8 @@ public class AddMinTask implements Task {
 
     @Override
     public void execute() {
-        while (true) {
+        boolean refillElement = true;
+        while (refillElement) {
             var route = Tasks.getRoute(inputManager);
             System.out.println("You are about to add minimal route:");
             System.out.println(route);
@@ -24,9 +28,7 @@ public class AddMinTask implements Task {
                 }
                 return;
             }
-            if (!Tasks.getApproval("Do you want to refill element with another values", inputManager)) {
-                return;
-            }
+            refillElement = Tasks.getApproval("Do you want to refill element with another values", inputManager);
         }
     }
 }
