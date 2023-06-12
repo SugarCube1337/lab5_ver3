@@ -8,7 +8,7 @@ import org.lab6.parser.ConsoleInputManager;
 
 
 /**
- * Main class for lab 5
+ * Main class for lab 6
  * test
  */
 
